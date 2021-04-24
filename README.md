@@ -49,6 +49,21 @@ export PATH="$GOPATH/bin:$PATH:$HOME/.opt/flutter/bin:$PATH:$HOME/.opt/dart-sdk/
 export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH:$ANDROID_HOME/emulator:$PATH"
 ```
 
+- 本地系统安装 `Fcitx` 输入法：
+
+```sh
+rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-qt fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons
+```
+
+- 编辑 `sudo vi /etc/profile` 设置输入法：
+
+```sh
+export INPUT_METHOD=fcitx5
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS=@im=fcitx5
+```
+
 - 本地系统安装 `Chrome` 浏览器 (不建议使用，可用第三方Flatpack仓库)：
 
 ```sh
