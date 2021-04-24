@@ -64,6 +64,12 @@ export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
 ```
 
+- 本地系统安装 `Virt-Manager` 虚拟机：
+
+```sh
+rpm-ostree install virt-install libvirt-daemon-config-network libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
+```
+
 - 本地系统安装 `Chrome` 浏览器 (不建议使用，可用第三方Flatpack仓库)：
 
 ```sh
