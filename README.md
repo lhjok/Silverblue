@@ -1,5 +1,5 @@
 ## Fedora Silverblue
-不可变操作系统（只读操作系统、桌面容器操作系统）。
+不可变操作系统、只读操作系统、桌面容器操作系统。
 
 - 安装阶段，`/boot` 分区不能使用 `Btrfs` 文件系统。
 
@@ -43,7 +43,6 @@ export JAVA_HOME=$HOME/.opt/jdk
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$HOME/.opt/go/bin:$PATH
 export PATH=$HOME/.opt/node/bin:$PATH
-export PATH=$HOME/.opt/yarn/bin:$PATH
 export PATH="$HOME/.cargo/bin:$PATH:$HOME/.npm-global/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH:$HOME/.opt/flutter/bin:$PATH:$HOME/.opt/dart-sdk/bin:$PATH"
 export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH:$ANDROID_HOME/emulator:$PATH"
@@ -58,7 +57,6 @@ rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-q
 - 编辑 `sudo vi /etc/profile` 设置输入法：
 
 ```sh
-export INPUT_METHOD=fcitx5
 export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
@@ -68,12 +66,6 @@ export XMODIFIERS=@im=fcitx5
 
 ```sh
 rpm-ostree install virt-install libvirt-daemon-config-network libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
-```
-
-- 本地系统安装 `Chrome` 浏览器 (不建议使用，可用第三方Flatpack仓库)：
-
-```sh
-rpm-ostree install google-chrome-stable_current_x86_64.rpm
 ```
 
 - 重启电脑：
@@ -96,3 +88,81 @@ toolbox run 工具名     //在本地终端运行容器内的应用。
 - 安装桌面应用（GUI容器）:
 
 在 `https://flathub.org/home` 下载应用市场镜像文件，直接在GNOME软件中心安装即可。
+
+#### 配置开发环境
+
+- 安装MySQL容器镜像：
+
+```sh
+podman pull mysql/mysql-server
+```
+
+- 查看已安装的镜像：
+
+```sh
+podman images
+```
+
+- 生成一个MySQL实例：
+
+```sh
+podman run -itd --name=qn_mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 docker.io/mysql/mysql-server:latest
+```
+
+- 查看实例的安装日志：
+
+```sh
+podman logs qn_mysql
+```
+
+- 查看所有已安装的实例：
+
+```sh
+podman ps -a
+```
+
+- 进入实例并执行登录命令：
+
+```sh
+podman exec -it qn_mysql mysql -u root -p
+```
+
+- 安装Redis容器镜像：
+
+```sh
+podman pull redis
+```
+
+- 生成一个Redis实例：
+
+```sh
+podman run -d --name=qn_redis -p 6379:6379 docker.io/library/redis:latest
+```
+
+- 启动和关闭实例：
+
+```sh
+# 开启和关闭MySQL实例
+podman start qn_mysql
+podman stop qn_mysql
+# 开启和关闭Redis实例
+podman start qn_redis
+podman stop qn_redis
+```
+
+- 本地连接MySQL容器出现拒绝连接的问题：
+
+```sh
+# 运行MySQL实例，并登录MySQL环境。
+podman exec -it qn_mysql mysql -u root -p
+# 查询允许连接的主机及用户信息。
+select Host,User from mysql.user;
+```
+
+```sh
+# 默认MySQL只支持本机连接数据库。
+# 需要把本地Host主机名，改成"%"表示匹配所有Host主机。
+update mysql.user set `Host` = '%' where `Host` = 'localhost' and User = 'root';
+# 使上面的改动生效。
+flush privileges;
+```
