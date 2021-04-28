@@ -166,3 +166,54 @@ update mysql.user set `Host` = '%' where `Host` = 'localhost' and User = 'root';
 # 使上面的改动生效。
 flush privileges;
 ```
+
+#### 开机启动MySQL和Redis容器
+
+- 在 `~/.config/systemd/user` 目录下创建 `qn_mysql.service` 文件：
+
+```sh
+[Unit]
+Description=Podman Container qn_mysql.service
+
+[Service]
+Type=forking
+Restart=on-failure
+ExecStart=/usr/bin/podman start qn_mysql
+ExecStop=/usr/bin/podman stop -t 10 qn_mysql
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- 在 `~/.config/systemd/user` 目录下创建 `qn_redis.service` 文件：
+
+```sh
+[Unit]
+Description=Podman Container qn_redis.service
+
+[Service]
+Type=forking
+Restart=on-failure
+ExecStart=/usr/bin/podman start qn_redis
+ExecStop=/usr/bin/podman stop -t 10 qn_redis
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- 在 `~/.bash_profile` 文件添加启动脚本：
+
+```sh
+# 开机启动MySQL和Redis容器
+systemctl --user start qn_mysql
+systemctl --user start qn_redis
+```
+
+- 使用 `Systemd` 开机启动命令（貌似不起作用）：
+
+```sh
+systemctl --user enable qn_mysql
+systemctl --user enable qn_redis
+```
