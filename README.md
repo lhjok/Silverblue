@@ -54,12 +54,12 @@ export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH:$ANDRO
 rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-qt fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons
 ```
 
-- 编辑 `sudo vi /etc/profile` 设置输入法：
+- 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法：
 
 ```sh
-export GTK_IM_MODULE=fcitx5
-export QT_IM_MODULE=fcitx5
-export XMODIFIERS=@im=fcitx5
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
 ```
 
 - 本地系统安装 `Virt-Manager` 虚拟机：
@@ -74,6 +74,20 @@ rpm-ostree install virt-install libvirt-daemon-config-network libvirt-daemon-kvm
 systemctl reboot
 ```
 
+- 添加第三方Flatpak源：
+
+```sh
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+```
+
+- 安装Chrome和Edge浏览器：
+
+```sh
+flatpak install com.google.Chrome
+flatpak install com.microsoft.Edge
+```
+
 - 容器工具的使用：
 
 ```sh
@@ -84,10 +98,6 @@ toolbox rm 容器名     //删除容器（-f = 删除运行中的容器、-a = �
 toolbox rmi 镜像名     //删除镜像（-f = 删除运行中的镜像、-a = 删除所有镜像）
 toolbox run 工具名     //在本地终端运行容器内的应用。
 ```
-
-- 安装桌面应用（GUI容器）:
-
-在 `https://flathub.org/home` 下载应用市场镜像文件，直接在GNOME软件中心安装即可。
 
 #### 配置开发环境
 
@@ -216,4 +226,19 @@ systemctl --user start qn_redis
 ```sh
 systemctl --user enable qn_mysql
 systemctl --user enable qn_redis
+```
+
+#### 设置VSCode在Flatpak环境下的终端问题
+
+- 把下面代码拷贝到 `settings.json` 设置文件里。
+
+```sh
+"terminal.integrated.profiles.linux": {
+    "ToolBox": {
+        "path": "bash",
+        "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-33"]
+    }
+},
+"terminal.integrated.defaultProfile.linux": "ToolBox",
+"terminal.integrated.automationShell.linux": "ToolBox",
 ```
