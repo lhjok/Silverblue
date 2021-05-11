@@ -68,9 +68,10 @@ export XMODIFIERS=@im=fcitx
 rpm-ostree install virt-install libvirt-daemon-config-network libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
 ```
 
-- 重启电脑：
+- 回滚系统和重启电脑：
 
 ```sh
+rpm-ostree rollback
 systemctl reboot
 ```
 
@@ -241,4 +242,26 @@ systemctl --user enable qn_redis
 },
 "terminal.integrated.defaultProfile.linux": "ToolBox",
 "terminal.integrated.automationShell.linux": "ToolBox",
+```
+
+#### 设置JetBrains全家桶Fcitx不跟随光标的问题
+
+- 在Flatpak环境下编辑启动文件，修改成自己编译的JDK文件目录。
+
+```sh
+# 修改CLION的启动文件
+sudo vi /var/lib/flatpak/app/com.jetbrains.CLion/current/active/files/extra/clion/bin/clion.sh
+export CLION_JDK=/var/opt/images/jdk
+# 修改GOLAND的启动文件
+sudo vi /var/lib/flatpak/app/com.jetbrains.GoLand/current/active/files/bin/goland.sh
+export GOLAND_JDK=/var/opt/images/jdk
+# 修改WebStorm的启动文件
+sudo vi /var/lib/flatpak/app/com.jetbrains.WebStorm/current/active/files/extra/webstorm/bin/webstorm.sh
+export WEBIDE_JDK=/var/opt/images/jdk
+# 修改IDEA的启动文件
+sudo vi /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate/current/active/files/extra/idea-IU/bin/idea.sh
+export IDEA_JDK=/var/opt/images/jdk
+# 修改Android Studio的启动文件
+sudo vi /var/lib/flatpak/app/com.google.AndroidStudio/current/active/files/extra/android-studio/bin/studio.sh
+export STUDIO_JDK=/var/opt/images/jdk
 ```
