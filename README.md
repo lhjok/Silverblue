@@ -176,6 +176,8 @@ select Host,User from mysql.user;
 update mysql.user set `Host` = '%' where `Host` = 'localhost' and User = 'root';
 # 使上面的改动生效。
 flush privileges;
+# 某些客户端连接可能会出问题。
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
 ```
 
 #### 开机启动MySQL和Redis容器
