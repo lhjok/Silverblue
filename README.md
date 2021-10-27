@@ -51,7 +51,8 @@ export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH:$ANDRO
 - 本地系统安装 `Fcitx` 输入法：
 
 ```sh
-rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-qt fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons
+rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk \
+fcitx5-qt fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons
 ```
 
 - 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法：
@@ -62,10 +63,18 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 ```
 
+- 本地系统安装基础开发环境：
+
+```sh
+rpm-ostree install cmake3 python3-devel gcc-c++ clang \
+libudev-devel autoconf automake cmake libtool
+```
+
 - 本地系统安装 `Virt-Manager` 虚拟机：
 
 ```sh
-rpm-ostree install virt-install libvirt-daemon-config-network libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
+rpm-ostree install virt-install libvirt-daemon-config-network \
+libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
 ```
 
 - 回滚系统和重启电脑：
@@ -117,7 +126,8 @@ podman images
 - 生成一个MySQL实例：
 
 ```sh
-podman run -itd --name=qn_mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 docker.io/mysql/mysql-server:latest
+podman run -itd --name=qn_mysql -e MYSQL_ROOT_PASSWORD=password -p \
+3306:3306 docker.io/mysql/mysql-server:latest
 ```
 
 - 查看实例的安装日志：
