@@ -67,7 +67,7 @@ export XMODIFIERS=@im=fcitx
 
 ```sh
 rpm-ostree install cmake3 python3-devel gcc-c++ clang \
-libudev-devel autoconf automake cmake libtool
+libudev-devel autoconf automake glib-devel libtool
 ```
 
 - 本地系统安装 `Virt-Manager` 虚拟机：
