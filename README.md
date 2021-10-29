@@ -272,22 +272,22 @@ systemctl --user enable qn_redis
 ```sh
 # 修改CLION的启动文件
 cd /var/lib/flatpak/app/com.jetbrains.CLion
-sudo vi /current/active/files/extra/clion/bin/clion.sh
+sudo vi current/active/files/extra/clion/bin/clion.sh
 export CLION_JDK=/var/opt/images/jdk
 # 修改GOLAND的启动文件
 cd /var/lib/flatpak/app/com.jetbrains.GoLand
-sudo vi /current/active/files/bin/goland.sh
+sudo vi current/active/files/bin/goland.sh
 export GOLAND_JDK=/var/opt/images/jdk
 # 修改WebStorm的启动文件
 cd /var/lib/flatpak/app/com.jetbrains.WebStorm
-sudo vi /current/active/files/extra/webstorm/bin/webstorm.sh
+sudo vi current/active/files/extra/webstorm/bin/webstorm.sh
 export WEBIDE_JDK=/var/opt/images/jdk
 # 修改IDEA的启动文件
 cd /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
-sudo vi /current/active/files/extra/idea-IU/bin/idea.sh
+sudo vi current/active/files/extra/idea-IU/bin/idea.sh
 export IDEA_JDK=/var/opt/images/jdk
 # 修改Android Studio的启动文件
 cd /var/lib/flatpak/app/com.google.AndroidStudio
-sudo vi /current/active/files/extra/android-studio/bin/studio.sh
+sudo vi current/active/files/extra/android-studio/bin/studio.sh
 export STUDIO_JDK=/var/opt/images/jdk
 ```
