@@ -19,7 +19,7 @@
 
 ```text
  一、toolbox，容器工具，生成无GUI的终端容器，与本地系统共享/home目录。
- 二、rpm-ostree，是唯一可以修改系统的工具，主要用于安装软件包，升级系统和系统回滚（为保证系统清洁，不建议多用）。
+ 二、rpm-ostree，是唯一可以修改系统的工具，主要用于安装软件包，升级系统和系统回滚。
  三、flatpack，主要用于桌面GUI应用的安装（使用GNOME软件中心安装）。
 ```
 
@@ -34,6 +34,8 @@
 
 #### 添加PATH环境变量
 
+- 编辑 `~/.profile` `~/.bashrc` 设置环境变量：
+
 ```sh
 export ANDROID_HOME=$HOME/.Android/SDK
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
@@ -43,31 +45,27 @@ export JAVA_HOME=$HOME/.opt/jdk
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$HOME/.opt/go/bin:$PATH
 export PATH=$HOME/.opt/node/bin:$PATH
+export PATH=$HOME/.opt/neovim/bin:$PATH
 export PATH="$HOME/.cargo/bin:$PATH:$HOME/.npm-global/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH:$HOME/.opt/flutter/bin:$PATH:$HOME/.opt/dart-sdk/bin:$PATH"
-export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH:$ANDROID_HOME/emulator:$PATH"
+export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH"
+export PATH="$ANDROID_HOME/emulator:$PATH"
 ```
 
-- 本地系统安装 `Fcitx` 输入法：
+- 本地系统安装输入法和基础开发环境：
 
 ```sh
-rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk \
-fcitx5-qt fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons
+rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-qt \
+fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons cmake3 python3-devel gcc-c++ clang \
+libudev-devel autoconf automake glib-devel libtool
 ```
 
-- 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法：
+- 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法（默认可不用设置）：
 
 ```sh
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-```
-
-- 本地系统安装基础开发环境：
-
-```sh
-rpm-ostree install cmake3 python3-devel gcc-c++ clang \
-libudev-devel autoconf automake glib-devel libtool
 ```
 
 - 本地系统安装 `Virt-Manager` 虚拟机：
@@ -96,6 +94,16 @@ flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatp
 ```sh
 flatpak install com.google.Chrome
 flatpak install com.microsoft.Edge
+```
+
+- 本地编译安装NeoVim编辑器：
+
+```sh
+pip3 install pynvim
+git clone https://github.com/neovim/neovim.git
+cd neovim
+make CMAKE_INSTALL_PREFIX=/var/home/lhjok/.opt/neovim/
+make install
 ```
 
 - 容器工具的使用：
@@ -261,19 +269,19 @@ systemctl --user enable qn_redis
 - 在Flatpak环境下编辑启动文件，修改成自己编译的JDK文件目录。
 
 ```sh
-# 修改CLION的启动文件
-sudo vi /var/lib/flatpak/app/com.jetbrains.CLion/current/active/files/extra/clion/bin/clion.sh
+# 修改CLION的启动文件: cd /var/lib/flatpak/app/com.jetbrains.CLion
+sudo vi /current/active/files/extra/clion/bin/clion.sh
 export CLION_JDK=/var/opt/images/jdk
-# 修改GOLAND的启动文件
-sudo vi /var/lib/flatpak/app/com.jetbrains.GoLand/current/active/files/bin/goland.sh
+# 修改GOLAND的启动文件: cd /var/lib/flatpak/app/com.jetbrains.GoLand
+sudo vi /current/active/files/bin/goland.sh
 export GOLAND_JDK=/var/opt/images/jdk
-# 修改WebStorm的启动文件
-sudo vi /var/lib/flatpak/app/com.jetbrains.WebStorm/current/active/files/extra/webstorm/bin/webstorm.sh
+# 修改WebStorm的启动文件: cd /var/lib/flatpak/app/com.jetbrains.WebStorm
+sudo vi /current/active/files/extra/webstorm/bin/webstorm.sh
 export WEBIDE_JDK=/var/opt/images/jdk
-# 修改IDEA的启动文件
-sudo vi /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate/current/active/files/extra/idea-IU/bin/idea.sh
+# 修改IDEA的启动文件: cd /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
+sudo vi /current/active/files/extra/idea-IU/bin/idea.sh
 export IDEA_JDK=/var/opt/images/jdk
-# 修改Android Studio的启动文件
-sudo vi /var/lib/flatpak/app/com.google.AndroidStudio/current/active/files/extra/android-studio/bin/studio.sh
+# 修改Android Studio的启动文件: cd /var/lib/flatpak/app/com.google.AndroidStudio
+sudo vi /current/active/files/extra/android-studio/bin/studio.sh
 export STUDIO_JDK=/var/opt/images/jdk
 ```
