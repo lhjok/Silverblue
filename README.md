@@ -68,15 +68,17 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 ```
 
-- 编辑 `sudo vi ~/.local/share/fcitx5/rime/build/default.yaml` 解决中英文切换冲突：
+- 解决中英文切换冲突，修改Rime的Shift键绑定：
 
 ```sh
+sudo vi ~/.local/share/fcitx5/rime/build/default.yaml
+```
+
+```yaml
 ascii_composer:
   ... ... ...
-  switch_key:
-    ... ... ...
-    Shift_L: noop
-    Shift_R: noop
+  Shift_L: noop
+  Shift_R: noop
 ```
 
 - 本地系统安装 `Virt-Manager` 虚拟机：
