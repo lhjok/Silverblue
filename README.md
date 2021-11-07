@@ -57,7 +57,7 @@ export PATH="$ANDROID_HOME/emulator:$PATH"
 ```sh
 rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-qt \
 fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons cmake3 python3-devel gcc-c++ clang \
-libudev-devel autoconf automake glib-devel libtool python2 python2-devel
+libudev-devel autoconf automake glib-devel gtk3-devel libtool python2 python2-devel
 ```
 
 - 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法（默认可不用设置）：
