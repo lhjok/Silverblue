@@ -58,7 +58,7 @@ export PATH="$ANDROID_HOME/emulator:$PATH"
 rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-qt python2 \
 fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons cmake3 python2-devel python3-devel gcc-c++ \
 clang clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
-the_silver_searcher fd-find libvterm libvterm-devel
+the_silver_searcher ripgrep fd-find libvterm libvterm-devel
 ```
 
 - 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法（默认可不用设置）：
