@@ -305,3 +305,16 @@ cd /var/lib/flatpak/app/com.google.AndroidStudio
 sudo vi current/active/files/extra/android-studio/bin/studio.sh
 export STUDIO_JDK=/var/opt/images/jdk
 ```
+
+#### 设置Virt-Manager桥接网络
+
+- 在Virt-Manager虚拟机内使用和本地一样的网段。
+
+```sh
+nmcli connection add ifname vnet0 type bridge con-name vnet0 connection.zone trusted
+nmcli connection add type bridge-slave ifname enp0s31f6 master vnet0
+nmcli connection modify vnet0 bridge.stp yes
+nmcli connection modify enp0s31f6 autoconnect no
+nmcli connection down enp0s31f6
+nmcli connection up id vnet0
+```
