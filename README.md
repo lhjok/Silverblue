@@ -52,13 +52,35 @@ export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
 ```
 
-- 本地系统安装输入法和基础开发环境：
+- 本地系统安装基础开发环境：
 
 ```sh
-rpm-ostree install fcitx5 fcitx5-autostart fcitx5-configtool fcitx5-gtk fcitx5-qt python2 \
-fcitx5-qt-module fcitx5-rime fcitx5-chinese-addons cmake3 python2-devel python3-devel gcc-c++ \
-clang clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
+$ rpm-ostree install cmake3 python2 python2-devel python3-devel gcc-c++ clang \
+clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
 the_silver_searcher ripgrep fd-find libvterm libvterm-devel
+```
+
+- 添加第三方Flatpak源：
+
+```sh
+$ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+$ flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+```
+
+- 安装Chrome和Edge浏览器：
+
+```sh
+$ flatpak install flathub com.google.Chrome
+$ flatpak install flathub com.microsoft.Edge
+```
+
+- 安装Fcitx5输入法并开机启动：
+
+```sh
+$ flatpak install flathub org.fcitx.Fcitx5
+$ flatpak install flathub org.fcitx.Fcitx5.Addon.Rime
+$ sudo cp ~/.local/share/flatpak/app/org.fcitx.Fcitx5/current/active/export/share\
+/applications/org.fcitx.Fcitx5.desktop /etc/xdg/autostart/
 ```
 
 - 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法（默认可不用设置）：
@@ -72,7 +94,7 @@ export XMODIFIERS=@im=fcitx
 - 解决中英文切换冲突，修改Rime的Shift键绑定：
 
 ```sh
-sudo vi ~/.local/share/fcitx5/rime/build/default.yaml
+$ sudo vi ~/.local/share/fcitx5/rime/build/default.yaml
 ```
 
 ```yaml
@@ -85,50 +107,36 @@ ascii_composer:
 - 本地系统安装 `Virt-Manager` 虚拟机：
 
 ```sh
-rpm-ostree install virt-install libvirt-daemon-config-network \
+$ rpm-ostree install virt-install libvirt-daemon-config-network \
 libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
 ```
 
 - 回滚系统和重启电脑：
 
 ```sh
-rpm-ostree rollback
-systemctl reboot
-```
-
-- 添加第三方Flatpak源：
-
-```sh
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-```
-
-- 安装Chrome和Edge浏览器：
-
-```sh
-flatpak install com.google.Chrome
-flatpak install com.microsoft.Edge
+$ rpm-ostree rollback
+$ systemctl reboot
 ```
 
 - 本地编译安装NeoVim编辑器：
 
 ```sh
-pip3 install pynvim
-git clone https://github.com/neovim/neovim.git
-cd neovim
-make CMAKE_INSTALL_PREFIX=/var/home/lhjok/.opt/neovim/
-make install
+$ pip3 install pynvim
+$ git clone https://github.com/neovim/neovim.git
+$ cd neovim
+$ make CMAKE_INSTALL_PREFIX=/var/home/lhjok/.opt/neovim/
+$ make install
 ```
 
 - 容器工具的使用：
 
 ```sh
-toolbox create     //创建一个默认容器
-toolbox enter     //进入容器环境【可使用(dnf)安装软件】
-toolbox list     //查看容器列表
-toolbox rm 容器名     //删除容器（-f = 删除运行中的容器、-a = 删除所有容器）
-toolbox rmi 镜像名     //删除镜像（-f = 删除运行中的镜像、-a = 删除所有镜像）
-toolbox run 工具名     //在本地终端运行容器内的应用。
+$ toolbox create     //创建一个默认容器
+$ toolbox enter     //进入容器环境【可使用(dnf)安装软件】
+$ toolbox list     //查看容器列表
+$ toolbox rm 容器名     //删除容器（-f = 删除运行中的容器、-a = 删除所有容器）
+$ toolbox rmi 镜像名     //删除镜像（-f = 删除运行中的镜像、-a = 删除所有镜像）
+$ toolbox run 工具名     //在本地终端运行容器内的应用。
 ```
 
 #### 配置开发环境
@@ -136,81 +144,81 @@ toolbox run 工具名     //在本地终端运行容器内的应用。
 - 安装MySQL容器镜像：
 
 ```sh
-podman pull mysql/mysql-server
+$ podman pull mysql/mysql-server
 ```
 
 - 查看已安装的镜像：
 
 ```sh
-podman images
+$ podman images
 ```
 
 - 生成一个MySQL实例：
 
 ```sh
-podman run -itd --name=qn_mysql -e MYSQL_ROOT_PASSWORD=password -p \
+$ podman run -itd --name=qn_mysql -e MYSQL_ROOT_PASSWORD=password -p \
 3306:3306 docker.io/mysql/mysql-server:latest
 ```
 
 - 查看实例的安装日志：
 
 ```sh
-podman logs qn_mysql
+$ podman logs qn_mysql
 ```
 
 - 查看所有已安装的实例：
 
 ```sh
-podman ps -a
+$ podman ps -a
 ```
 
 - 进入实例并执行登录命令：
 
 ```sh
-podman exec -it qn_mysql mysql -u root -p
+$ podman exec -it qn_mysql mysql -u root -p
 mysql> CREATE DATABASE qnDis;
 ```
 
 - 安装Redis容器镜像：
 
 ```sh
-podman pull redis
+$ podman pull redis
 ```
 
 - 生成一个Redis实例：
 
 ```sh
-podman run -d --name=qn_redis -p 6379:6379 docker.io/library/redis:latest
+$ podman run -d --name=qn_redis -p 6379:6379 docker.io/library/redis:latest
 ```
 
 - 启动和关闭实例：
 
 ```sh
 # 开启和关闭MySQL实例
-podman start qn_mysql
-podman stop qn_mysql
+$ podman start qn_mysql
+$ podman stop qn_mysql
 # 开启和关闭Redis实例
-podman start qn_redis
-podman stop qn_redis
+$ podman start qn_redis
+$ podman stop qn_redis
 ```
 
 - 本地连接MySQL容器出现拒绝连接的问题：
 
 ```sh
 # 运行MySQL实例，并登录MySQL环境。
-podman exec -it qn_mysql mysql -u root -p
+$ podman exec -it qn_mysql mysql -u root -p
 # 查询允许连接的主机及用户信息。
-select Host,User from mysql.user;
+mysql> select Host,User from mysql.user;
 ```
 
 ```sh
 # 默认MySQL只支持本机连接数据库。
 # 需要把本地Host主机名，改成"%"表示匹配所有Host主机。
-update mysql.user set `Host` = '%' where `Host` = 'localhost' and User = 'root';
+mysql> update mysql.user set `Host` = '%' where `Host` = 'localhost' and User = 'root';
 # 使上面的改动生效。
-flush privileges;
+mysql> flush privileges;
 # 某些客户端连接可能会出问题。
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
+mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
 ```
 
 #### 开机启动MySQL和Redis容器
@@ -253,15 +261,15 @@ WantedBy=multi-user.target
 
 ```sh
 # 开机启动MySQL和Redis容器
-systemctl --user start qn_mysql
-systemctl --user start qn_redis
+$ systemctl --user start qn_mysql
+$ systemctl --user start qn_redis
 ```
 
 - 使用 `Systemd` 开机启动命令（貌似不起作用）：
 
 ```sh
-systemctl --user enable qn_mysql
-systemctl --user enable qn_redis
+$ systemctl --user enable qn_mysql
+$ systemctl --user enable qn_redis
 ```
 
 #### 设置VSCode在Flatpak环境下的终端问题
@@ -272,7 +280,7 @@ systemctl --user enable qn_redis
 "terminal.integrated.profiles.linux": {
     "ToolBox": {
         "path": "bash",
-        "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-33"]
+        "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-36"]
     }
 },
 "terminal.integrated.defaultProfile.linux": "ToolBox",
@@ -285,24 +293,24 @@ systemctl --user enable qn_redis
 
 ```sh
 # 修改CLION的启动文件
-cd /var/lib/flatpak/app/com.jetbrains.CLion
-sudo vi current/active/files/extra/clion/bin/clion.sh
+$ cd ~/.local/share/flatpak/app/com.jetbrains.CLion
+$ sudo vi current/active/files/extra/clion/bin/clion.sh
 export CLION_JDK=/var/opt/images/jdk
 # 修改GOLAND的启动文件
-cd /var/lib/flatpak/app/com.jetbrains.GoLand
-sudo vi current/active/files/bin/goland.sh
+$ cd ~/.local/share/flatpak/app/com.jetbrains.GoLand
+$ sudo vi current/active/files/bin/goland.sh
 export GOLAND_JDK=/var/opt/images/jdk
 # 修改WebStorm的启动文件
-cd /var/lib/flatpak/app/com.jetbrains.WebStorm
-sudo vi current/active/files/extra/webstorm/bin/webstorm.sh
+$ cd ~/.local/share/flatpak/app/com.jetbrains.WebStorm
+$ sudo vi current/active/files/extra/webstorm/bin/webstorm.sh
 export WEBIDE_JDK=/var/opt/images/jdk
 # 修改IDEA的启动文件
-cd /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
-sudo vi current/active/files/extra/idea-IU/bin/idea.sh
+$ cd ~/.local/share/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
+$ sudo vi current/active/files/extra/idea-IU/bin/idea.sh
 export IDEA_JDK=/var/opt/images/jdk
 # 修改Android Studio的启动文件
-cd /var/lib/flatpak/app/com.google.AndroidStudio
-sudo vi current/active/files/extra/android-studio/bin/studio.sh
+$ cd ~/.local/share/flatpak/app/com.google.AndroidStudio
+$ sudo vi current/active/files/extra/android-studio/bin/studio.sh
 export STUDIO_JDK=/var/opt/images/jdk
 ```
 
@@ -311,10 +319,10 @@ export STUDIO_JDK=/var/opt/images/jdk
 - 在Virt-Manager虚拟机内使用和本地一样的网段。
 
 ```sh
-nmcli connection add ifname vnet0 type bridge con-name vnet0 connection.zone trusted
-nmcli connection add type bridge-slave ifname enp0s31f6 master vnet0
-nmcli connection modify vnet0 bridge.stp yes
-nmcli connection modify enp0s31f6 autoconnect no
-nmcli connection down enp0s31f6
-nmcli connection up id vnet0
+$ nmcli connection add ifname vnet0 type bridge con-name vnet0 connection.zone trusted
+$ nmcli connection add type bridge-slave ifname enp0s31f6 master vnet0
+$ nmcli connection modify vnet0 bridge.stp yes
+$ nmcli connection modify enp0s31f6 autoconnect no
+$ nmcli connection down enp0s31f6
+$ nmcli connection up id vnet0
 ```
