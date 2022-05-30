@@ -81,6 +81,8 @@ $ flatpak install flathub org.fcitx.Fcitx5
 $ flatpak install flathub org.fcitx.Fcitx5.Addon.Rime
 $ sudo cp ~/.local/share/flatpak/app/org.fcitx.Fcitx5/current/active/export/share\
 /applications/org.fcitx.Fcitx5.desktop /etc/xdg/autostart/
+$ sudo cp ~/.local/share/flatpak/app/com.dropbox.Client/current/active/export/share\
+/applications/com.dropbox.Client.desktop /etc/xdg/autostart/
 ```
 
 - 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法（默认可不用设置）：
