@@ -5,8 +5,8 @@
 
 ```sh
  分区方案 (一、优点，可变分区在固态系统盘，程序运行会更快)：
- /boot= 15G(Ext4)、/boot/efi= 2G(EFI)、swap= 16G、
- /= 剩余固态磁盘(Btrfs)、/home= 全部机械磁盘(Btrfs)。
+ /boot= 10G(Ext4)、/boot/efi= 2G(EFI)、swap= 16G、
+ /= 80G(Btrfs)、/home= 剩余固态磁盘(Btrfs)、用户挂载(~/data)=剩余机械磁盘(Btrfs)。
 ```
 
 ```sh
@@ -63,15 +63,39 @@ the_silver_searcher ripgrep fd-find libvterm libvterm-devel
 - 添加第三方Flatpak源：
 
 ```sh
+# 执行下面命令后，在软件仓库设置开启第三方Flathub源。
 $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 $ flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 ```
 
-- 安装Chrome和Edge浏览器：
+- 安装各种应用程序：
 
 ```sh
 $ flatpak install flathub com.google.Chrome
 $ flatpak install flathub com.microsoft.Edge
+$ flatpak install flathub com.brave.Browser
+$ flatpak install flathub com.visualstudio.code
+$ flatpak install flathub com.valvesoftware.Steam
+$ flatpak install flathub com.qq.QQmusic
+$ flatpak install flathub org.telegram.desktop
+$ flatpak install flathub tv.kodi.Kodi
+$ flatpak install flathub org.gimp.GIMP
+$ flatpak install flathub net.xmind.XMind
+$ flatpak install flathub com.google.AndroidStudio
+$ flatpak install flathub com.wps.Office
+$ flatpak install flathub com.discordapp.Discord
+$ flatpak install flathub com.github.alecaddd.sequeler
+$ flatpak install flathub app.resp.RESP
+$ flatpak install flathub com.github.gi_lom.dialect
+$ flatpak install flathub org.remmina.Remmina
+$ flatpak install flathub org.blender.Blender
+$ flatpak install flathub io.mpv.Mpv
+$ flatpak install flathub io.github.shiftey.Desktop
+$ flatpak install flathub com.skype.Client
+$ flatpak install flathub com.netease.CloudMusic
+$ flatpak install flathub com.jetbrains.CLion
+$ flatpak install flathub com.jetbrains.GoLand
+$ flatpak install flathub com.jetbrains.WebStorm
 ```
 
 - 安装Fcitx5输入法并开机启动：
@@ -79,9 +103,10 @@ $ flatpak install flathub com.microsoft.Edge
 ```sh
 $ flatpak install flathub org.fcitx.Fcitx5
 $ flatpak install flathub org.fcitx.Fcitx5.Addon.Rime
-$ sudo cp ~/.local/share/flatpak/app/org.fcitx.Fcitx5/current/active/export/share\
+$ flatpak install flathub com.dropbox.Client
+$ sudo cp /var/lib/flatpak/app/org.fcitx.Fcitx5/current/active/export/share\
 /applications/org.fcitx.Fcitx5.desktop /etc/xdg/autostart/
-$ sudo cp ~/.local/share/flatpak/app/com.dropbox.Client/current/active/export/share\
+$ sudo cp /var/lib/flatpak/app/com.dropbox.Client/current/active/export/share\
 /applications/com.dropbox.Client.desktop /etc/xdg/autostart/
 ```
 
@@ -295,23 +320,23 @@ $ systemctl --user enable qn_redis
 
 ```sh
 # 修改CLION的启动文件
-$ cd ~/.local/share/flatpak/app/com.jetbrains.CLion
+$ cd /var/lib/flatpak/app/com.jetbrains.CLion
 $ sudo vi current/active/files/extra/clion/bin/clion.sh
 export CLION_JDK=/var/opt/images/jdk
 # 修改GOLAND的启动文件
-$ cd ~/.local/share/flatpak/app/com.jetbrains.GoLand
+$ cd /var/lib/flatpak/app/com.jetbrains.GoLand
 $ sudo vi current/active/files/bin/goland.sh
 export GOLAND_JDK=/var/opt/images/jdk
 # 修改WebStorm的启动文件
-$ cd ~/.local/share/flatpak/app/com.jetbrains.WebStorm
+$ cd /var/lib/flatpak/app/com.jetbrains.WebStorm
 $ sudo vi current/active/files/extra/webstorm/bin/webstorm.sh
 export WEBIDE_JDK=/var/opt/images/jdk
 # 修改IDEA的启动文件
-$ cd ~/.local/share/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
+$ cd /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
 $ sudo vi current/active/files/extra/idea-IU/bin/idea.sh
 export IDEA_JDK=/var/opt/images/jdk
 # 修改Android Studio的启动文件
-$ cd ~/.local/share/flatpak/app/com.google.AndroidStudio
+$ cd /var/lib/flatpak/app/com.google.AndroidStudio
 $ sudo vi current/active/files/extra/android-studio/bin/studio.sh
 export STUDIO_JDK=/var/opt/images/jdk
 ```
