@@ -57,7 +57,7 @@ export PATH="$ANDROID_HOME/emulator:$PATH"
 ```sh
 $ rpm-ostree install cmake3 python2 python2-devel python3-devel gcc-c++ clang \
 clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
-the_silver_searcher ripgrep fd-find libvterm libvterm-devel
+the_silver_searcher ripgrep fd-find libvterm libvterm-devel openssl openssl-devel perl-core
 ```
 
 - 添加第三方Flatpak源：
