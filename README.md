@@ -305,14 +305,27 @@ $ systemctl --user enable qn_redis
 - 把下面代码拷贝到 `settings.json` 设置文件里。
 
 ```sh
-"terminal.integrated.profiles.linux": {
-    "ToolBox": {
-        "path": "bash",
-        "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-36"]
-    }
-},
-"terminal.integrated.defaultProfile.linux": "ToolBox",
-"terminal.integrated.automationShell.linux": "ToolBox",
+{
+    "editor.accessibilityPageSize": 15,
+    "editor.fontSize": 15,
+    "scm.inputFontSize": 14,
+    "debug.console.fontSize": 15,
+    "markdown.preview.fontSize": 15,
+    "window.zoomLevel": 0.51,
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "Consolas, 'Droid Sans Mono', 'monospace', monospace",
+    "terminal.integrated.profiles.linux": {
+        "ToolBox": {
+            "path": "bash",
+            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-36"]
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "ToolBox",
+    "terminal.integrated.automationProfile.linux": "ToolBox",
+    "update.mode": "none",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true
+}
 ```
 
 #### 设置JetBrains全家桶Fcitx不跟随光标的问题
