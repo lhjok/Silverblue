@@ -139,11 +139,20 @@ $ rpm-ostree install virt-install libvirt-daemon-config-network \
 libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
 ```
 
-- 回滚系统和重启电脑：
+- 升级和回滚系统：
 
 ```sh
-$ rpm-ostree rollback
-$ systemctl reboot
+$ ostree remote list    //查看远程系统列表
+$ ostree remote refs fedora    //选择要升级的系统
+$ rpm-ostree rebase fedora:fedora/37/x86_64/silverblue    //执行升级到指定版本
+$ rpm-ostree cleanup -b    //清除临时文件
+$ rpm-ostree cleanup -p    //删除挂起的部署
+$ rpm-ostree cleanup -r    //删除回滚的部署
+$ rpm-ostree cleanup -m    //删除缓存元数据
+$ rpm-ostree update    //执行系统更新
+$ flatpak update    //升级所有Flatpak应用和依赖
+$ rpm-ostree rollback    //回滚到上一次到版本
+$ systemctl reboot    //重启系统
 ```
 
 - 本地编译安装NeoVim编辑器：
