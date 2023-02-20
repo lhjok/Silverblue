@@ -58,7 +58,8 @@ export PATH="$ANDROID_HOME/emulator:$PATH"
 $ rpm-ostree install cmake3 python2 python2-devel python3-devel gcc-c++ clang \
 clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
 the_silver_searcher ripgrep fd-find libvterm libvterm-devel openssl openssl-devel \
-perl-core libsoup-devel webkitgtk4-jsc-devel webkit2gtk3-devel
+aria2 perl-core libsoup-devel webkitgtk4-jsc-devel webkit2gtk3-devel rust rustc \
+rust-src cargo rustfmt clippy rust-analyzer
 ```
 
 - 添加第三方Flatpak源：
@@ -150,6 +151,7 @@ $ rpm-ostree cleanup -p    //删除挂起的部署
 $ rpm-ostree cleanup -r    //删除回滚的部署
 $ rpm-ostree cleanup -m    //删除缓存元数据
 $ rpm-ostree update    //执行系统更新
+$ rpm-ostree status    //查看回滚版本和已安装包详情
 $ flatpak update    //升级所有Flatpak应用和依赖
 $ rpm-ostree rollback    //回滚到上一次到版本
 $ systemctl reboot    //重启系统
@@ -300,6 +302,7 @@ WantedBy=multi-user.target
 # 开机启动MySQL和Redis容器
 $ systemctl --user start qn_mysql
 $ systemctl --user start qn_redis
+$ aria2c --enable-rpc --rpc-listen-port=6800
 ```
 
 - 使用 `Systemd` 开机启动命令（貌似不起作用）：
@@ -326,11 +329,15 @@ $ systemctl --user enable qn_redis
     "terminal.integrated.profiles.linux": {
         "ToolBox": {
             "path": "bash",
-            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-36"]
+            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-37"]
         }
     },
     "terminal.integrated.defaultProfile.linux": "ToolBox",
-    "terminal.integrated.automationProfile.linux": "ToolBox",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.analysis.extraPaths": [
+        "/var/home/lhjok/.local/lib/python3.11/site-packages",
+        "/var/home/lhjok/.local/lib/python3.10/site-packages"
+    ],
     "update.mode": "none",
     "git.enableSmartCommit": true,
     "git.autofetch": true
