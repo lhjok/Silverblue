@@ -34,7 +34,7 @@
 
 #### 添加PATH环境变量
 
-- 编辑 `~/.profile` `~/.bashrc` 设置环境变量：
+- 编辑 `~/.bash_profile` `~/.bashrc` 设置环境变量：
 
 ```sh
 export ANDROID_HOME=$HOME/.Android/SDK
@@ -112,9 +112,10 @@ $ sudo cp /var/lib/flatpak/app/com.dropbox.Client/current/active/export/share\
 /applications/com.dropbox.Client.desktop /etc/xdg/autostart/
 ```
 
-- 编辑 `sudo vi /etc/profile` `~/.profile` `~/.bash_profile` 设置输入法（默认可不用设置）：
+- 编辑 `sudo vi /etc/profile` 设置输入法（默认可不用设置）：
 
 ```sh
+aria2c --enable-rpc --rpc-listen-port=6800
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
@@ -302,7 +303,6 @@ WantedBy=multi-user.target
 # 开机启动MySQL和Redis容器
 $ systemctl --user start qn_mysql
 $ systemctl --user start qn_redis
-$ aria2c --enable-rpc --rpc-listen-port=6800
 ```
 
 - 使用 `Systemd` 开机启动命令（貌似不起作用）：
