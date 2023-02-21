@@ -115,7 +115,7 @@ $ sudo cp /var/lib/flatpak/app/com.dropbox.Client/current/active/export/share\
 - 编辑 `sudo vi /etc/profile` 设置输入法（默认可不用设置）：
 
 ```sh
-aria2c --enable-rpc --rpc-listen-port=6800
+aria2c --enable-rpc --rpc-listen-port=6800 &
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
