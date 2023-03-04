@@ -333,14 +333,34 @@ $ systemctl --user enable qn_redis
         }
     },
     "terminal.integrated.defaultProfile.linux": "ToolBox",
+    "update.mode": "none",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
     "python.terminal.activateEnvInCurrentTerminal": true,
     "python.analysis.extraPaths": [
         "/var/home/lhjok/.local/lib/python3.11/site-packages",
         "/var/home/lhjok/.local/lib/python3.10/site-packages"
     ],
-    "update.mode": "none",
-    "git.enableSmartCommit": true,
-    "git.autofetch": true
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "rust-analyzer.inlayHints.typeHints.enable": false,
+    "rust-analyzer.inlayHints.parameterHints.enable": false,
+    "rust-analyzer.inlayHints.chainingHints.enable": false,
+    "rust-analyzer.inlayHints.closingBraceHints.enable": false,
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "rules": {
+            "*.mutable": {
+                "underline": false,
+            }
+        }
+    },
+    "editor.unicodeHighlight.includeStrings": false,
+    "move-analyzer.server.path": "/var/home/lhjok/.cargo/bin/move-analyzer",
+    "emmet.includeLanguages": {
+        "rust": "html",
+    }
 }
 ```
 
