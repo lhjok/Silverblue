@@ -323,6 +323,7 @@ $ systemctl --user enable qn_redis
     "debug.console.fontSize": 15,
     "markdown.preview.fontSize": 15,
     "window.zoomLevel": 0.51,
+    "workbench.tree.indent": 20,
     "window.titleBarStyle": "custom",
     "editor.fontFamily": "Consolas, 'Droid Sans Mono', 'monospace', monospace",
     "terminal.integrated.profiles.linux": {
@@ -355,11 +356,12 @@ $ systemctl --user enable qn_redis
             }
         }
     },
+    "editor.inlineSuggest.enabled": true,
     "editor.unicodeHighlight.includeStrings": false,
     "move-analyzer.server.path": "/var/home/lhjok/.cargo/bin/move-analyzer",
     "emmet.includeLanguages": {
         "rust": "html",
-    }
+    },
 }
 ```
 
