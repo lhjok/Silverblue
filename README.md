@@ -86,14 +86,10 @@ $ flatpak install flathub com.google.AndroidStudio
 $ flatpak install flathub com.wps.Office
 $ flatpak install flathub com.discordapp.Discord
 $ flatpak install flathub com.github.alecaddd.sequeler
-$ flatpak install flathub app.resp.RESP
-$ flatpak install flathub com.github.gi_lom.dialect
 $ flatpak install flathub org.remmina.Remmina
 $ flatpak install flathub org.blender.Blender
 $ flatpak install flathub io.mpv.Mpv
-$ flatpak install flathub io.github.shiftey.Desktop
 $ flatpak install flathub com.skype.Client
-$ flatpak install flathub com.netease.CloudMusic
 $ flatpak install flathub com.jetbrains.CLion
 $ flatpak install flathub com.jetbrains.GoLand
 $ flatpak install flathub com.jetbrains.WebStorm
@@ -145,7 +141,8 @@ libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
 ```sh
 $ ostree remote list    //查看远程系统列表
 $ ostree remote refs fedora    //选择要升级的系统
-$ rpm-ostree rebase fedora:fedora/37/x86_64/silverblue    //执行升级到指定版本
+$ rpm-ostree rebase fedora:fedora/38/x86_64/silverblue    //执行升级到指定版本
+$ rpm-ostree override remove firefox    //删除系统自带的Firefox浏览器
 $ rpm-ostree cleanup -b    //清除临时文件
 $ rpm-ostree cleanup -p    //删除挂起的部署
 $ rpm-ostree cleanup -r    //删除回滚的部署
@@ -329,7 +326,7 @@ $ systemctl --user enable qn_redis
     "terminal.integrated.profiles.linux": {
         "ToolBox": {
             "path": "bash",
-            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-37"]
+            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-38"]
         }
     },
     "terminal.integrated.defaultProfile.linux": "ToolBox",
