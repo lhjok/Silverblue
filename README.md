@@ -111,7 +111,8 @@ $ sudo cp /var/lib/flatpak/app/com.dropbox.Client/current/active/export/share\
 - 禁用ibus（因为Fedora中gnome-shell强依赖ibus所以无法直接删除ibus）
 
 ```sh
-systemctl mask --user org.freedesktop.IBus.session.GNOME.service org.freedesktop.IBus.session.generic.service
+systemctl mask --user org.freedesktop.IBus.session.GNOME.service
+systemctl mask --user org.freedesktop.IBus.session.generic.service
 mkdir -p .local/share/dbus-1/services
 ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.IBus.service
 ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.portal.IBus.service
