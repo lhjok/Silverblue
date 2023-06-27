@@ -59,6 +59,7 @@ $ rpm-ostree install vim cmake3 python2 python2-devel python3-devel gcc-c++ clan
 clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
 the_silver_searcher ripgrep fd-find libvterm libvterm-devel openssl openssl-devel \
 aria2 perl-core libsoup-devel webkitgtk4-jsc-devel webkit2gtk3-devel expat-devel
+$ rpm-ostree install --apply-live fcitx5-qt-module fcitx5-{gtk2,gtk3,gtk4}
 ```
 
 - 添加第三方Flatpak源：
@@ -105,6 +106,15 @@ $ sudo cp /var/lib/flatpak/app/org.fcitx.Fcitx5/current/active/export/share\
 /applications/org.fcitx.Fcitx5.desktop /etc/xdg/autostart/
 $ sudo cp /var/lib/flatpak/app/com.dropbox.Client/current/active/export/share\
 /applications/com.dropbox.Client.desktop /etc/xdg/autostart/
+```
+
+- 禁用ibus（因为Fedora中gnome-shell强依赖ibus所以无法直接删除ibus）
+
+```sh
+systemctl mask --user org.freedesktop.IBus.session.GNOME.service org.freedesktop.IBus.session.generic.service
+mkdir -p .local/share/dbus-1/services
+ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.IBus.service
+ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.portal.IBus.service
 ```
 
 - 编辑 `sudo vi /etc/profile` 设置输入法（默认可不用设置）：
