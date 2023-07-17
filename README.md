@@ -57,8 +57,8 @@ export PATH="$ANDROID_HOME/emulator:$PATH"
 ```sh
 $ rpm-ostree install vim cmake3 python2 python2-devel python3-devel gcc-c++ clang \
 clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
-the_silver_searcher ripgrep fd-find libvterm libvterm-devel openssl openssl-devel \
-aria2 perl-core libsoup-devel webkitgtk4-jsc-devel webkit2gtk3-devel expat-devel
+the_silver_searcher ripgrep fd-find libvterm libvterm-devel openssl openssl-devel aria2 \
+perl-core libsoup-devel webkitgtk4-jsc-devel webkit2gtk3-devel expat-devel libtree-sitter
 $ rpm-ostree install --apply-live fcitx5-qt-module fcitx5-{gtk2,gtk3,gtk4}
 ```
 
