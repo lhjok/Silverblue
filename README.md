@@ -188,10 +188,11 @@ $ toolbox run 工具名     //在本地终端运行容器内的应用。
 
 #### 配置开发环境
 
-- 安装MySQL容器镜像：
+- 安装MySQL和PostgreSQL容器镜像：
 
 ```sh
 $ podman pull mysql/mysql-server
+$ podman pull postgres
 ```
 
 - 查看已安装的镜像：
@@ -200,17 +201,20 @@ $ podman pull mysql/mysql-server
 $ podman images
 ```
 
-- 生成一个MySQL实例：
+- 生成一个MySQL和PostgreSQL实例：
 
 ```sh
 $ podman run -itd --name=qn_mysql -e MYSQL_ROOT_PASSWORD=password -p \
 3306:3306 docker.io/mysql/mysql-server:latest
+$ podman run --name qn_postgres -e TZ=PRC -e POSTGRES_USER=root -e \
+POSTGRES_DB=database -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
 ```
 
 - 查看实例的安装日志：
 
 ```sh
 $ podman logs qn_mysql
+$ podman logs qn_postgres
 ```
 
 - 查看所有已安装的实例：
@@ -223,6 +227,7 @@ $ podman ps -a
 
 ```sh
 $ podman exec -it qn_mysql mysql -u root -p
+$ podman exec -it qn_postgres psql -U root
 mysql> CREATE DATABASE qnDis;
 ```
 
@@ -244,6 +249,9 @@ $ podman run -d --name=qn_redis -p 6379:6379 docker.io/library/redis:latest
 # 开启和关闭MySQL实例
 $ podman start qn_mysql
 $ podman stop qn_mysql
+# 开启和关闭PostgreSQL实例
+$ podman start qn_postgres
+$ podman stop qn_postgres
 # 开启和关闭Redis实例
 $ podman start qn_redis
 $ podman stop qn_redis
@@ -268,7 +276,7 @@ mysql> flush privileges;
 mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
 ```
 
-#### 开机启动MySQL和Redis容器
+#### 开机启动MySQL、PostgreSQL和Redis容器
 
 - 在 `~/.config/systemd/user` 目录下创建 `qn_mysql.service` 文件：
 
@@ -281,6 +289,23 @@ Type=forking
 Restart=on-failure
 ExecStart=/usr/bin/podman start qn_mysql
 ExecStop=/usr/bin/podman stop -t 10 qn_mysql
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- 在 `~/.config/systemd/user` 目录下创建 `qn_postgres.service` 文件：
+
+```sh
+[Unit]
+Description=Podman Container qn_postgres.service
+
+[Service]
+Type=forking
+Restart=on-failure
+ExecStart=/usr/bin/podman start qn_postgres
+ExecStop=/usr/bin/podman stop -t 10 qn_postgres
 KillMode=none
 
 [Install]
@@ -307,8 +332,9 @@ WantedBy=multi-user.target
 - 在 `~/.bash_profile` 文件添加启动脚本：
 
 ```sh
-# 开机启动MySQL和Redis容器
+# 开机启动MySQL、PostgreSQL和Redis容器
 $ systemctl --user start qn_mysql
+$ systemctl --user start qn_postgres
 $ systemctl --user start qn_redis
 ```
 
@@ -316,6 +342,7 @@ $ systemctl --user start qn_redis
 
 ```sh
 $ systemctl --user enable qn_mysql
+$ systemctl --user enable qn_postgres
 $ systemctl --user enable qn_redis
 ```
 
@@ -394,6 +421,10 @@ export WEBIDE_JDK=/var/opt/images/jdk
 $ cd /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
 $ sudo vi current/active/files/extra/idea-IU/bin/idea.sh
 export IDEA_JDK=/var/opt/images/jdk
+# 修改PyCharm的启动文件
+$ cd /var/lib/flatpak/app/com.jetbrains.PyCharm-Professional
+$ sudo vi current/active/files/extra/bin/pycharm.sh
+export PYCHARM_JDK=/var/opt/images/jdk
 # 修改Android Studio的启动文件
 $ cd /var/lib/flatpak/app/com.google.AndroidStudio
 $ sudo vi current/active/files/extra/android-studio/bin/studio.sh
