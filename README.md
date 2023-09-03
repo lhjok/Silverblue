@@ -207,7 +207,7 @@ $ podman images
 $ podman run -itd --name=qn_mysql -e MYSQL_ROOT_PASSWORD=password -p \
 3306:3306 docker.io/mysql/mysql-server:latest
 $ podman run --name qn_postgres -e TZ=PRC -e POSTGRES_USER=root -e \
-POSTGRES_DB=database -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+POSTGRES_DB=qndbs -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
 ```
 
 - 查看实例的安装日志：
@@ -227,8 +227,8 @@ $ podman ps -a
 
 ```sh
 $ podman exec -it qn_mysql mysql -u root -p
-$ podman exec -it qn_postgres psql -U root
-mysql> CREATE DATABASE qnDis;
+mysql> CREATE DATABASE qndbs;
+$ podman exec -it qn_postgres psql -U root qndbs
 ```
 
 - 安装Redis容器镜像：
