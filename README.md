@@ -52,6 +52,25 @@ export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
 ```
 
+- 本地系统安装NVIDIA显卡驱动：
+
+```sh
+# 更新整个系统
+$ rpm-ostree upgrade
+# 添加第三方源
+$ rpm-ostree install https://download1.rpmfusion.org/free/fedora/\
+rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.\
+rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+$ systemctl reboot
+# 安装NVIDIA显卡驱动
+$ rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia
+# 如果需要CUDA支持，请运行以下命令。
+# $ rpm-ostree install xorg-x11-drv-nvidia-cuda
+$ rpm-ostree kargs --append=rd.driver.blacklist=nouveau \
+--append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
+$ systemctl reboot
+```
+
 - 本地系统安装基础开发环境：
 
 ```sh
@@ -397,6 +416,8 @@ $ systemctl --user enable qn_redis
     "emmet.includeLanguages": {
         "rust": "html",
     },
+    "go.gopath": "/var/home/lhjok/.golang",
+    "go.goroot": "/var/home/lhjok/.opt/go",
 }
 ```
 
