@@ -57,6 +57,7 @@ export PATH="$ANDROID_HOME/emulator:$PATH"
 ```sh
 # 更新整个系统
 $ rpm-ostree upgrade
+$ systemctl reboot
 # 添加第三方源
 $ rpm-ostree install https://download1.rpmfusion.org/free/fedora/\
 rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.\
