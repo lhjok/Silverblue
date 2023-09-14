@@ -164,7 +164,8 @@ ascii_composer:
 
 ```sh
 $ rpm-ostree install virt-install libvirt-daemon-config-network \
-libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer
+libvirt-daemon-kvm qemu-kvm virt-manager virt-viewer virglrenderer \
+qemu-device-display-virtio-vga qemu-device-display-virtio-vga-gl
 ```
 
 - 升级和回滚系统：
