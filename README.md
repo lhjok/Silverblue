@@ -69,6 +69,8 @@ $ rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia
 # $ rpm-ostree install xorg-x11-drv-nvidia-cuda
 $ rpm-ostree kargs --append=rd.driver.blacklist=nouveau \
 --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
+# 解决NVIDIA在AMD平台上的报错
+$ systemctl disable nvidia-powerd.service
 $ systemctl reboot
 ```
 
