@@ -50,6 +50,13 @@ export PATH="$HOME/.cargo/bin:$PATH:$HOME/.npm-global/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH:$HOME/.opt/flutter/bin:$PATH:$HOME/.opt/dart-sdk/bin:$PATH"
 export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
+# 设置JetBrains全家桶Fcitx不跟随光标的问题
+export CLION_JDK=/var/opt/images
+export GOLAND_JDK=/var/opt/images
+export WEBIDE_JDK=/var/opt/images
+export IDEA_JDK=/var/opt/images
+export PYCHARM_JDK=/var/opt/images
+export STUDIO_JDK=/var/opt/images
 ```
 
 - 本地系统安装NVIDIA显卡驱动：
@@ -427,37 +434,6 @@ $ systemctl --user enable qn_redis
     "go.gopath": "/var/home/lhjok/.golang",
     "go.goroot": "/var/home/lhjok/.opt/go",
 }
-```
-
-#### 设置JetBrains全家桶Fcitx不跟随光标的问题
-
-- 在Flatpak环境下编辑启动文件，修改成自己编译的JDK文件目录。
-
-```sh
-# 修改CLION的启动文件
-$ cd /var/lib/flatpak/app/com.jetbrains.CLion
-$ sudo vi current/active/files/extra/clion/bin/clion.sh
-export CLION_JDK=/var/opt/images/jdk
-# 修改GOLAND的启动文件
-$ cd /var/lib/flatpak/app/com.jetbrains.GoLand
-$ sudo vi current/active/files/bin/goland.sh
-export GOLAND_JDK=/var/opt/images/jdk
-# 修改WebStorm的启动文件
-$ cd /var/lib/flatpak/app/com.jetbrains.WebStorm
-$ sudo vi current/active/files/extra/webstorm/bin/webstorm.sh
-export WEBIDE_JDK=/var/opt/images/jdk
-# 修改IDEA的启动文件
-$ cd /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
-$ sudo vi current/active/files/extra/idea-IU/bin/idea.sh
-export IDEA_JDK=/var/opt/images/jdk
-# 修改PyCharm的启动文件
-$ cd /var/lib/flatpak/app/com.jetbrains.PyCharm-Professional
-$ sudo vi current/active/files/extra/bin/pycharm.sh
-export PYCHARM_JDK=/var/opt/images/jdk
-# 修改Android Studio的启动文件
-$ cd /var/lib/flatpak/app/com.google.AndroidStudio
-$ sudo vi current/active/files/extra/android-studio/bin/studio.sh
-export STUDIO_JDK=/var/opt/images/jdk
 ```
 
 #### 设置Virt-Manager桥接网络
