@@ -72,6 +72,10 @@ $ rpm-ostree kargs --append=rd.driver.blacklist=nouveau \
 # 解决NVIDIA在AMD平台上的报错
 $ systemctl disable nvidia-powerd.service
 $ systemctl reboot
+# 解决NVIDIA显卡在Electron应用下的GPU加速问题
+# 复制(/var/lib/flatpak/app/.../current/active/export/share/applications/)下的桌面文件
+# 粘贴到(~/.local/share/applications/)下并编辑桌面文件，在启动项后面添加(--disable-gpu)参数
+# 百度网盘应用在启动项后面添加(--disable-gpu --no-sandbox)参数
 ```
 
 - 本地系统安装基础开发环境：
