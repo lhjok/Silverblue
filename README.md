@@ -144,16 +144,19 @@ $ sudo cp /var/lib/flatpak/app/com.dropbox.Client/current/active/export/share\
 - 禁用ibus（因为Fedora中gnome-shell强依赖ibus所以无法直接删除ibus）
 
 ```sh
-systemctl mask --user org.freedesktop.IBus.session.GNOME.service
-systemctl mask --user org.freedesktop.IBus.session.generic.service
-mkdir -p .local/share/dbus-1/services
-ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.IBus.service
-ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.portal.IBus.service
+$ systemctl mask --user org.freedesktop.IBus.session.GNOME.service
+$ systemctl mask --user org.freedesktop.IBus.session.generic.service
+$ mkdir -p .local/share/dbus-1/services
+$ ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.IBus.service
+$ ln -s /dev/null .local/share/dbus-1/services/org.freedesktop.portal.IBus.service
 ```
 
-- 编辑 `sudo vi /etc/profile` 设置输入法（默认可不用设置）：
+- 编辑 `sudo vim /etc/profile` 设置输入法（默认可不用设置）：
 
 ```sh
+podman start qn_mysql
+podman start qn_postgres
+podman start qn_redis
 aria2c --enable-rpc --rpc-listen-port=6800 &
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -163,7 +166,7 @@ export XMODIFIERS=@im=fcitx
 - 解决中英文切换冲突，修改Rime的Shift键绑定：
 
 ```sh
-$ sudo vi ~/.local/share/fcitx5/rime/build/default.yaml
+$ vim ~/.local/share/fcitx5/rime/build/default.yaml
 ```
 
 ```yaml
@@ -308,76 +311,6 @@ mysql> update mysql.user set `Host` = '%' where `Host` = 'localhost' and User = 
 mysql> flush privileges;
 # 某些客户端连接可能会出问题。
 mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
-```
-
-#### 开机启动MySQL、PostgreSQL和Redis容器
-
-- 在 `~/.config/systemd/user` 目录下创建 `qn_mysql.service` 文件：
-
-```sh
-[Unit]
-Description=Podman Container qn_mysql.service
-
-[Service]
-Type=forking
-Restart=on-failure
-ExecStart=/usr/bin/podman start qn_mysql
-ExecStop=/usr/bin/podman stop -t 10 qn_mysql
-KillMode=none
-
-[Install]
-WantedBy=multi-user.target
-```
-
-- 在 `~/.config/systemd/user` 目录下创建 `qn_postgres.service` 文件：
-
-```sh
-[Unit]
-Description=Podman Container qn_postgres.service
-
-[Service]
-Type=forking
-Restart=on-failure
-ExecStart=/usr/bin/podman start qn_postgres
-ExecStop=/usr/bin/podman stop -t 10 qn_postgres
-KillMode=none
-
-[Install]
-WantedBy=multi-user.target
-```
-
-- 在 `~/.config/systemd/user` 目录下创建 `qn_redis.service` 文件：
-
-```sh
-[Unit]
-Description=Podman Container qn_redis.service
-
-[Service]
-Type=forking
-Restart=on-failure
-ExecStart=/usr/bin/podman start qn_redis
-ExecStop=/usr/bin/podman stop -t 10 qn_redis
-KillMode=none
-
-[Install]
-WantedBy=multi-user.target
-```
-
-- 在 `~/.bash_profile` 文件添加启动脚本：
-
-```sh
-# 开机启动MySQL、PostgreSQL和Redis容器
-$ systemctl --user start qn_mysql
-$ systemctl --user start qn_postgres
-$ systemctl --user start qn_redis
-```
-
-- 使用 `Systemd` 开机启动命令（貌似不起作用）：
-
-```sh
-$ systemctl --user enable qn_mysql
-$ systemctl --user enable qn_postgres
-$ systemctl --user enable qn_redis
 ```
 
 #### 设置VSCode在Flatpak环境下的终端问题
