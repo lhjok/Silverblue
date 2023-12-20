@@ -90,7 +90,7 @@ perl-core libsoup-devel webkitgtk4-jsc-devel webkit2gtk3-devel expat-devel libtr
 $ rpm-ostree install --apply-live fcitx5-qt-module fcitx5-{gtk2,gtk3,gtk4}
 ```
 
-- 添加第三方Flatpak源：
+- 系统个人偏好设置：
 
 ```sh
 # 执行下面命令后，在软件仓库设置开启第三方Flathub源。
@@ -98,6 +98,23 @@ $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.fl
 $ flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 # 设置GDM支持HIDPI显示，先在GNOME设置好缩放比例。
 $ sudo cp ~/.config/monitors.xml /var/lib/gdm/.config/
+# 设置关闭系统自动更新，默认为自动更新。
+$ sudo vim /etc/rpm-ostreed.conf
+# AutomaticUpdatePolicy=none  //去掉注释
+# 安装了kimpanel输入法状态管理的配置。
+$ sudo vim ~/.local/share/gnome-shell/extensions/kimpanel@kde.org/stylesheet.css
+# .kimpanel-candidate-item
+# .kimpanel-candidate-item:hover
+# .kimpanel-candidate-item:active
+# .kimpanel-candidate-item:active:hover
+# 在以上CSS样式中各添加下面两行。
+#   border-radius: 5px;
+#   padding: 2px 5px 3px 4px;
+##################################################
+# .popup-menu-boxpointer.kimpanel-popup-boxpointer
+# .popup-menu-content.kimpanel-popup-content
+# 在以上CSS样式中各添加下面一行。
+#   border-radius: 5px;
 ```
 
 - 安装各种应用程序：
