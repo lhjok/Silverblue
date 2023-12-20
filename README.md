@@ -51,12 +51,7 @@ export PATH="$GOPATH/bin:$PATH:$HOME/.opt/flutter/bin:$PATH:$HOME/.opt/dart-sdk/
 export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
 # 设置JetBrains全家桶Fcitx不跟随光标的问题
-export CLION_JDK=/var/opt/images
-export GOLAND_JDK=/var/opt/images
-export WEBIDE_JDK=/var/opt/images
 export IDEA_JDK=/var/opt/images
-export PYCHARM_JDK=/var/opt/images
-export STUDIO_JDK=/var/opt/images
 ```
 
 - 本地系统安装NVIDIA显卡驱动：
@@ -110,7 +105,6 @@ $ sudo cp ~/.config/monitors.xml /var/lib/gdm/.config/
 ```sh
 $ flatpak install flathub com.google.Chrome
 $ flatpak install flathub com.microsoft.Edge
-$ flatpak install flathub com.brave.Browser
 $ flatpak install flathub com.visualstudio.code
 $ flatpak install flathub com.valvesoftware.Steam
 $ flatpak install flathub com.qq.QQmusic
@@ -118,17 +112,12 @@ $ flatpak install flathub org.telegram.desktop
 $ flatpak install flathub tv.kodi.Kodi
 $ flatpak install flathub org.gimp.GIMP
 $ flatpak install flathub net.xmind.XMind
-$ flatpak install flathub com.google.AndroidStudio
 $ flatpak install flathub com.wps.Office
 $ flatpak install flathub com.discordapp.Discord
 $ flatpak install flathub com.github.alecaddd.sequeler
-$ flatpak install flathub org.remmina.Remmina
 $ flatpak install flathub org.blender.Blender
 $ flatpak install flathub io.mpv.Mpv
 $ flatpak install flathub com.skype.Client
-$ flatpak install flathub com.jetbrains.CLion
-$ flatpak install flathub com.jetbrains.GoLand
-$ flatpak install flathub com.jetbrains.WebStorm
 ```
 
 - 安装Fcitx5输入法并开机启动：
@@ -333,7 +322,7 @@ mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassw
     "terminal.integrated.profiles.linux": {
         "ToolBox": {
             "path": "bash",
-            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-38"]
+            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-39"]
         }
     },
     "terminal.integrated.defaultProfile.linux": "ToolBox",
