@@ -101,6 +101,8 @@ $ rpm-ostree install --apply-live fcitx5-qt-module fcitx5-{gtk2,gtk3,gtk4}
 # 执行下面命令后，在软件仓库设置开启第三方Flathub源。
 $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 $ flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+# 设置GDM支持HIDPI显示，先在GNOME设置好缩放比例。
+$ sudo cp ~/.config/monitors.xml /var/lib/gdm/.config/
 ```
 
 - 安装各种应用程序：
