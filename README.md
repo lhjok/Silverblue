@@ -51,7 +51,7 @@ export PATH="$GOPATH/bin:$PATH:$HOME/.opt/flutter/bin:$PATH:$HOME/.opt/dart-sdk/
 export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
 # 设置JetBrains全家桶Fcitx不跟随光标的问题
-export IDEA_JDK=/var/opt/images
+export RUSTROVER_JDK=/var/opt/images
 ```
 
 - 本地系统安装NVIDIA显卡驱动：
@@ -109,12 +109,13 @@ $ sudo vim ~/.local/share/gnome-shell/extensions/kimpanel@kde.org/stylesheet.css
 # .kimpanel-candidate-item:active:hover
 # 在以上CSS样式中各添加下面两行。
 #   border-radius: 5px;
-#   padding: 2px 5px 3px 4px;
+#   padding: 1px 5px 2px 4px;
 ##################################################
 # .popup-menu-boxpointer.kimpanel-popup-boxpointer
 # .popup-menu-content.kimpanel-popup-content
 # 在以上CSS样式中各添加下面一行。
-#   border-radius: 5px;
+#   border-radius: 6px;
+#   padding: 2px 5px 4px 5px;
 ```
 
 - 安装各种应用程序：
