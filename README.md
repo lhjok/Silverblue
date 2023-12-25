@@ -50,8 +50,6 @@ export PATH="$HOME/.cargo/bin:$PATH:$HOME/.npm-global/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH:$HOME/.opt/flutter/bin:$PATH:$HOME/.opt/dart-sdk/bin:$PATH"
 export PATH="$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
-# 设置JetBrains全家桶Fcitx不跟随光标的问题
-export RUSTROVER_JDK=/var/opt/images
 ```
 
 - 本地系统安装NVIDIA显卡驱动：
@@ -100,7 +98,10 @@ $ flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.fla
 $ sudo cp ~/.config/monitors.xml /var/lib/gdm/.config/
 # 设置关闭系统自动更新，默认为自动更新。
 $ sudo vim /etc/rpm-ostreed.conf
-# AutomaticUpdatePolicy=none  //去掉注释
+# AutomaticUpdatePolicy=check  //去掉注释，更改参数。
+# 关闭软件中心的自动更新选项。
+$ systemctl reload rpm-ostreed
+$ systemctl enable rpm-ostreed-automatic.timer --now
 # 安装了kimpanel输入法状态管理的配置。
 $ sudo vim ~/.local/share/gnome-shell/extensions/kimpanel@kde.org/stylesheet.css
 # .kimpanel-candidate-item
@@ -133,9 +134,20 @@ $ flatpak install flathub net.xmind.XMind
 $ flatpak install flathub com.wps.Office
 $ flatpak install flathub com.discordapp.Discord
 $ flatpak install flathub com.github.alecaddd.sequeler
+$ flatpak install flathub io.podman_desktop.PodmanDesktop
+$ flatpak install flathub io.github.shiftey.Desktop
+$ flatpak install flathub org.mozilla.Thunderbird
+$ flatpak install flathub com.redis.RedisInsight
+$ flatpak install flathub com.jetbrains.IntelliJ-IDEA-Ultimate
+$ flatpak install flathub com.jetbrains.PyCharm-Professional
+$ flatpak install flathub com.jetbrains.WebStorm
+$ flatpak install flathub com.jetbrains.RustRover
+$ flatpak install flathub com.jetbrains.GoLand
 $ flatpak install flathub org.blender.Blender
 $ flatpak install flathub io.mpv.Mpv
 $ flatpak install flathub com.skype.Client
+$ flatpak install flathub com.baidu.NetDisk
+$ flatpak install flathub io.bassi.Amberol
 ```
 
 - 安装Fcitx5输入法并开机启动：
@@ -198,7 +210,7 @@ qemu-device-display-virtio-vga qemu-device-display-virtio-vga-gl
 ```sh
 $ ostree remote list    //查看远程系统列表
 $ ostree remote refs fedora    //选择要升级的系统
-$ rpm-ostree rebase fedora:fedora/38/x86_64/silverblue    //执行升级到指定版本
+$ rpm-ostree rebase fedora:fedora/39/x86_64/silverblue    //执行升级到指定版本
 $ rpm-ostree override remove firefox    //删除系统自带的Firefox浏览器
 $ rpm-ostree cleanup -b    //清除临时文件
 $ rpm-ostree cleanup -p    //删除挂起的部署
