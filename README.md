@@ -116,7 +116,7 @@ $ sudo vim ~/.local/share/gnome-shell/extensions/kimpanel@kde.org/stylesheet.css
 # .popup-menu-content.kimpanel-popup-content
 # 在以上CSS样式中各添加下面一行。
 #   border-radius: 6px;
-#   padding: 2px 5px 4px 5px;
+#   padding: 4px 5px 4px 5px;
 ```
 
 - 安装各种应用程序：
