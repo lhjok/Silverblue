@@ -85,7 +85,7 @@ $ rpm-ostree install vim screen cmake3 python2 python2-devel python3-devel gcc-c
 clang-devel libudev-devel autoconf automake glib-devel gtk3-devel libtool libgccjit \
 the_silver_searcher ripgrep fd-find libvterm libvterm-devel openssl openssl-devel aria2 \
 perl-core libsoup-devel webkitgtk4-jsc-devel webkit2gtk3-devel expat-devel libtree-sitter
-$ rpm-ostree install --apply-live fcitx5-qt-module fcitx5-{gtk2,gtk3,gtk4}
+$ rpm-ostree install --apply-live fcitx5-{gtk2,gtk3,gtk4}
 ```
 
 - 系统个人偏好设置：
@@ -126,19 +126,22 @@ $ flatpak install flathub com.google.Chrome
 $ flatpak install flathub com.microsoft.Edge
 $ flatpak install flathub com.visualstudio.code
 $ flatpak install flathub com.valvesoftware.Steam
+$ flatpak install flathub com.qq.QQ
 $ flatpak install flathub com.qq.QQmusic
+$ flatpak install flathub com.tencent.WeChat
+$ flatpak install flathub com.tencent.wemeet
 $ flatpak install flathub org.telegram.desktop
 $ flatpak install flathub tv.kodi.Kodi
 $ flatpak install flathub org.gimp.GIMP
 $ flatpak install flathub net.xmind.XMind
 $ flatpak install flathub com.wps.Office
 $ flatpak install flathub com.discordapp.Discord
-$ flatpak install flathub com.github.alecaddd.sequeler
+$ flatpak install flathub io.beekeeperstudio.Studio
+$ flatpak install flathub org.dbgate.DbGate
 $ flatpak install flathub io.podman_desktop.PodmanDesktop
 $ flatpak install flathub io.github.shiftey.Desktop
 $ flatpak install flathub org.mozilla.Thunderbird
 $ flatpak install flathub com.redis.RedisInsight
-$ flatpak install flathub com.jetbrains.IntelliJ-IDEA-Ultimate
 $ flatpak install flathub com.jetbrains.PyCharm-Professional
 $ flatpak install flathub com.jetbrains.WebStorm
 $ flatpak install flathub com.jetbrains.RustRover
@@ -182,19 +185,6 @@ aria2c --enable-rpc --rpc-listen-port=6800 &
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-```
-
-- 解决中英文切换冲突，修改Rime的Shift键绑定：
-
-```sh
-$ vim ~/.local/share/fcitx5/rime/build/default.yaml
-```
-
-```yaml
-ascii_composer:
-  ... ... ...
-  Shift_L: noop
-  Shift_R: noop
 ```
 
 - 本地系统安装 `Virt-Manager` 虚拟机：
@@ -352,7 +342,7 @@ mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassw
     "terminal.integrated.profiles.linux": {
         "ToolBox": {
             "path": "bash",
-            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-39"]
+            "args": ["-c", "flatpak-spawn --host toolbox enter -c fedora-toolbox-40"]
         }
     },
     "terminal.integrated.defaultProfile.linux": "ToolBox",
